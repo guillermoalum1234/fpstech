@@ -37,3 +37,4 @@ echo " /etc/ssh/sshd_config modificado"
 sudo systemctl restart sshd
 echo "ssh reiniciado"
 echo "Password Random $PASS"
+echo -e "$PASS" > $(pwd)/$USER.key
