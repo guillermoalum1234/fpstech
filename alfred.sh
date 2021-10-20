@@ -1,7 +1,7 @@
 #!/bin/bash
 USER="fpstech"
 GROUP="fpstech"
-PASS=`date +%s | sha256sum | base64 | head -c 32 ; echo`
+PASS=`date +%s | sha256sum | base64 | head -c 16 ; echo`
 # Generacion de usuario #
 getent passwd $USER
 
@@ -36,4 +36,4 @@ echo " /etc/ssh/sshd_config modificado"
 
 sudo systemctl restart sshd
 echo "ssh reiniciado"
-echo "Password temporal $PASS"
+echo "Password Random $PASS"
