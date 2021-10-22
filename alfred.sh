@@ -34,7 +34,7 @@ sudo sed -i 's/^### END TRUSTED KEYS.*//g' /etc/ssh/sshd_config
 echo -e  "\n### BEGIN TRUSTED KEYS ###\nTrustedUserCAKeys /etc/ssh/alfred-ca.pub\n### END TRUSTED KEYS ###" |sudo tee -a /etc/ssh/sshd_config
 echo " /etc/ssh/sshd_config modificado"
 
-sudo systemctl restart sshd
+sudo systemctl restart sshd 
 echo "ssh reiniciado"
 echo "Random Pass $PASS"
 echo "Done ;)" 
