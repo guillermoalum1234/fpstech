@@ -2,7 +2,6 @@
 USER="fpstech"
 GROUP="fpstech"
 PASS=`date +%s | sha256sum | base64 | head -c 16 ; echo`
-TIME=`date '+%d/%m/%Y_%H:%M:%S'`
 # Generacion de usuario #
 getent passwd $USER
 
