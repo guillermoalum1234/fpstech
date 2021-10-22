@@ -2,6 +2,7 @@
 USER="fpstech"
 GROUP="fpstech"
 PASS=`date +%s | sha256sum | base64 | head -c 16 ; echo`
+TIME=`date '+%d/%m/%Y_%H:%M:%S'`
 # Generacion de usuario #
 getent passwd $USER
 
@@ -12,7 +13,7 @@ usermod -a -G $GROUP $USER
 chage -E -1 -M -1 $USER
 echo $USER:$PASS | chpasswd
 # SETEO DE SUDO #
-cp /etc/sudoers /etc/sudoers.pre.alfred
+cp /etc/sudoers /etc/sudoers.pre.alfred.$TIME
 echo -e "\n %"$USER" ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 else
 echo " Usuario $USER existente cambiando contraseña y expiracion"
@@ -27,7 +28,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCKRv6qQVNKmEwPXpgk5rB1Qtuizr0p40wcTuuljcO1
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDW6+ZNRLWuEI9uENYzZ0zo9yPO8Dqo9QIWviorPFSlnDxtgVtLzQwSc7y+p17jueoGRQCmYlDCLITWBw8lZF9POXTwYnI7PVTe3VJncq/9fhv1236Spx56l3IaxsK0qSUGbb0SMD6Ar1by3OBhBNISM2r4PohKBy7bqSjpoj5Um3n0NSsAml15aAV+hOJMwiXg9PAP72iBZyxh8AjCLIvrFkm1laoqofGCwqoDjCi9FHu9iA9p7L4uCGbJMdekpQkn0nxYDoj/YTr+dL9WIxL+q03Kd9kMtDKXP3UtKgaU7L78zTTspyPhEsoLD91PummePJz+LmrIh0Ud6OqfE5OMboSOCwCgVL7v2cHEIlTaBPUy4G/kRkWYQjQZzhdpXevxc+I37SmwLFKAe9xoTqHpK06sYKBN+ASPQy4LD9VyxXQpzwdTcKESrFDCdFJpVlBUIbp67EEoMIDWBLxivNINKM5ZlyiYNnDNvjAdNPFtVokrh70shIPQjbsze6ZFtAqJUMbN97dAr9VcvqjaaS7unyGhiEruIkhZN02kNJk/bw27nayGPjNDKfXuB6fp7rtEZJ8sgSZS3AzK5FIwlekcKV2b1azIL8fq/xiIFZkGilKr/3OuasOKhk61z/f5KQwaHejBtDefsjTZoKmZ+27C3dklI9kHehXQKqWgL1qJ4w== alfred-ca-offline@us-east-2" | sudo tee /etc/ssh/alfred-ca.pub
 
 #MODIFICACION CONFIGURACION
-sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.pre.alfred.old
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.pre.alfred.$TIME
 sudo sed -i 's/^TrustedUserCAKeys.*//g' /etc/ssh/sshd_config
 sudo sed -i 's/^### BEGIN TRUSTED KEYS.*//g' /etc/ssh/sshd_config
 sudo sed -i 's/^### END TRUSTED KEYS.*//g' /etc/ssh/sshd_config
