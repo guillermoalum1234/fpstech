@@ -7,6 +7,7 @@ getent passwd $USER
 
 if [ $? -ne 0 ] ; then
 echo "User $USER no existe, Creando $USER"
+groupadd $GROUP #Modificacion para Azure
 useradd -m $USER -g $GROUP
 usermod -a -G $GROUP $USER
 chage -E -1 -M -1 $USER
